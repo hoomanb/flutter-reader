@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart';
@@ -46,8 +47,16 @@ final String feedUrl = 'http://rss.cbc.ca/lineup/topstories.xml';
                         // Remove html from description
                         var description = snapshot.data.items[position].description != null ? parse(snapshot.data.items[position].description).documentElement.text : '...';
 
+                        // Add thumbnail if available
+                        Widget thumbnail = snapshot.data.items[position].media.thumbnails.length > 0 ?
+                          CachedNetworkImage(
+                            imageUrl: snapshot.data.items[position].media.thumbnails[0].url,
+                            progressIndicatorBuilder: (context, url, downloadProgress) => CircularProgressIndicator(value: downloadProgress.progress),
+                          ) : null;
+
                         return Card(
                           child: ListTile(
+                            leading: thumbnail,
                             title: Text(
                               unescape.convert(snapshot.data.items[position].title),
                               style: Theme.of(context).textTheme.headline5
