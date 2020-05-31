@@ -5,7 +5,7 @@ import 'package:html_unescape/html_unescape.dart';
 
 void main() => runApp(new MyApp());
 
-final String feedUrl = 'https://nationalpost.com/feed/atom/';
+final String feedUrl = 'https://www.huffingtonpost.ca/feeds/index.xml';
 
 Future<AtomFeed> fetchFeed() async {
   final response =
@@ -25,9 +25,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Flutter Reader Demo',
+      title: 'Flutter Reader',
       theme: new ThemeData(
-        primarySwatch: Colors.orange,
+        primarySwatch: Colors.blue,
       ),
       home: new MyHomePage(title: 'Reader Home Page'),
     );
@@ -94,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                     );
                   } else if (snapshot.hasError) {
-                    return Text("${snapshot.error}");
+                    return Text("ERROR: ${snapshot.error}");
                   }
                   return CircularProgressIndicator();
                 }

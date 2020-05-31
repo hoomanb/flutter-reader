@@ -1,6 +1,6 @@
-# flutter_reader
+# FlutterReader
 
-A news reader Flutter application.
+A very basic news feed reader demo in Flutter.
 
 ## Getting Started
 
