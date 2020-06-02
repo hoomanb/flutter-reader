@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'single_story.dart';
 import 'app_state.dart';
 
 class FeedList extends StatefulWidget {
@@ -14,8 +15,6 @@ class FeedList extends StatefulWidget {
 }
 
 class _FeedListState extends State<FeedList> {
-
-final String feedUrl = 'http://rss.cbc.ca/lineup/topstories.xml';
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +64,14 @@ final String feedUrl = 'http://rss.cbc.ca/lineup/topstories.xml';
                               top: 15.0,
                               bottom: 15.0,
                             ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SingleStory(title: item['title'], link: item['link'], content: item['description']),
+                                  ),
+                              );
+                            },
                           )
                         );
                       },

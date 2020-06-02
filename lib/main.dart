@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         theme: new ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: new FeedList(title: 'Reader Home Page'),
+        home: new FeedList(title: AppState.TITLE_FEEDLIST),
       )
     );
   }

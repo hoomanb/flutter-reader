@@ -9,6 +9,7 @@ import 'package:html_unescape/html_unescape.dart';
 
 // Update and keep directory data from remote JSON
 class AppState extends ChangeNotifier {
+  static const String TITLE_FEEDLIST = 'Top Stories';
 
   static const String STORAGE_KEY_FEED = 'FeedJson';
   static const String STORAGE_KEY_FEED_TIMESTAMP = 'DirectoryJsonTimestamp';
