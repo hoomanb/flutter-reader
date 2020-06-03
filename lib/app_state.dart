@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:html/dom.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:html/parser.dart';
@@ -84,12 +85,19 @@ class AppState extends ChangeNotifier {
 
           newItem['description'] = rssItem.description;
 
+          Document htmlDocument = rssItem.description != null ? parse(rssItem.description) : null;
+
           // Remove html from description for excerpt
-          newItem['excerpt'] = rssItem.description != null ? parse(rssItem.description).documentElement.text.trim() : '...';
+          newItem['excerpt'] = htmlDocument != null ? htmlDocument.documentElement.text.trim() : '...';
 
           // Add thumbnail if available
           if (rssItem.media.thumbnails.length > 0) {
             newItem['thumbnail'] = rssItem.media.thumbnails[0].url;
+          } else if (htmlDocument != null) {
+            List images = htmlDocument.getElementsByTagName('img');
+            if (images.length > 0) {
+              newItem['thumbnail'] = images.first.attributes['src'];
+            }
           }
 
           items.add(newItem);

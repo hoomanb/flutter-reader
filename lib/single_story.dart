@@ -37,7 +37,11 @@ class _SingleStoryState extends State<SingleStory> {
                 child: WebView(
                   initialUrl: widget.content.length > 0
                     ? Uri.dataFromString(
-                      '<body style="margin: 0; padding: 0">'
+                      '<head><style>'
+                      + 'body {width:100%} '
+                      + 'img {max-width: 100%; height: auto} '
+                      + '</style></head>'
+                      + '<body style="margin: 0; padding: 0">'
                         + widget.content
                       + '</body>',
                       mimeType: 'text/html',
